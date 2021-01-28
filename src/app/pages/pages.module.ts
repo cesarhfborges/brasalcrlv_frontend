@@ -14,6 +14,7 @@ import {
 } from "@nebular/theme";
 import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
     NbUserModule,
     NbMenuModule,
     NbContextMenuModule,
-    NbCardModule
+    NbCardModule,
+    TableModule
   ]
 })
 export class PagesModule { }

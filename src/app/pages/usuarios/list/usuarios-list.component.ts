@@ -11,6 +11,12 @@ export class UsuariosListComponent implements OnInit {
 
   usuarios: Usuario[];
 
+  cols: Array<{field: string; header: string; }> = [
+    { field: 'name', header: 'Nome' },
+    { field: 'lastname', header: 'Sobrenome' },
+  ];
+  loading = false;
+
   constructor(
     private usuariosService: UsuariosService,
   ) { }
@@ -20,13 +26,14 @@ export class UsuariosListComponent implements OnInit {
   }
 
   getUsuarios(): void {
+    this.loading = true;
     this.usuariosService.getUsuarios().subscribe(
       response => {
-        console.log(response);
+        this.loading = false;
         this.usuarios = response;
       },
       error => {
-
+        this.loading = false;
       }
     );
   }

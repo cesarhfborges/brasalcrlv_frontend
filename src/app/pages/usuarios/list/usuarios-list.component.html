@@ -3,7 +3,36 @@
     Nebula
   </nb-card-header>
   <nb-card-body>
-    {{usuarios|json}}
+
+    <p-table [columns]="cols" [value]="usuarios" [loading]="loading" [showLoader]="false" dataKey="id">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+          <th style="width: 240px;">&nbsp;</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{rowData[col.field]}}
+          </td>
+          <td>
+            <button nbButton outline status="info">
+              <nb-icon icon="edit-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loading">
+        <tr>
+          <th colspan="{{cols.length + 1}}" class="text-center">
+            Carregando Aguarde...
+          </th>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
-  <nb-card-footer>By Wikipedia</nb-card-footer>
+  <nb-card-footer>Total de usuários: {{usuarios ? usuarios.length : 0}}</nb-card-footer>
 </nb-card>
