@@ -5,17 +5,19 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
 import {
-  NbButtonModule, NbContextMenuModule,
+  NbButtonModule, NbCardModule, NbContextMenuModule,
   NbIconModule,
   NbLayoutModule,
   NbMenuModule,
   NbSidebarModule,
   NbUserModule
 } from "@nebular/theme";
+import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
+import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, PagesComponent],
+  declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -25,7 +27,8 @@ import {
     NbButtonModule,
     NbUserModule,
     NbMenuModule,
-    NbContextMenuModule
+    NbContextMenuModule,
+    NbCardModule
   ]
 })
 export class PagesModule { }

@@ -2,6 +2,9 @@ nb-layout {
   nb-layout-header {
     .row {
       width: 100%;
+      a.logo {
+        margin-left: 16px;
+      }
       .col.toggle {
         max-width: 84px;
       }
