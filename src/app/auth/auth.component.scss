@@ -13,8 +13,10 @@ nb-layout-column {
     background: rgba(0,0,0,.6);
     z-index: 5;
   }
-  &div {
+  .adjust {
     position: relative;
+    height: 100%;
+    width: 100%;
     z-index: 6;
   }
 }

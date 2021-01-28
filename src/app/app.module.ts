@@ -4,7 +4,15 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NbLayoutModule, NbThemeModule} from '@nebular/theme';
+import {
+  NbIconModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbSidebarModule,
+  NbThemeModule,
+  NbToastrModule,
+  NbWindowModule
+} from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -12,6 +20,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 import {ErrorInterceptor} from "./shared/interceptors/error.interceptor";
 import {SharedModule} from "./shared/shared.module";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localePt);
 
@@ -24,10 +33,16 @@ registerLocaleData(localePt);
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    NbThemeModule.forRoot({name: 'default'}),
     NbLayoutModule,
     NbEvaIconsModule,
     HttpClientModule,
+    NgbModule,
+    NbIconModule,
+    NbThemeModule.forRoot({name: 'default'}),
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbWindowModule.forRoot(),
+    NbToastrModule.forRoot(),
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-PT'},

@@ -1,0 +1,29 @@
+nb-layout {
+  nb-layout-header {
+    .row {
+      width: 100%;
+      .col.toggle {
+        max-width: 84px;
+      }
+    }
+    button.toggleMenu {
+      padding: 0;
+      margin: 0;
+      font-size: 2rem;
+      line-height: 2rem;
+      background: red;
+      nb-icon {
+        transform: scale(2);
+      }
+    }
+  }
+  nb-sidebar {
+    .main-container-fixed {
+      top: 0;
+    }
+  }
+  nb-layout-footer {
+    .createdBy {
+    }
+  }
+}

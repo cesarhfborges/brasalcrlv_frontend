@@ -5,11 +5,15 @@ import {isNull} from "util";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
+import {Usuario} from "../models/usuario";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private usuario: Usuario;
+  private token: string;
 
   constructor(
     private router: Router,
@@ -17,8 +21,8 @@ export class AuthService {
   ) {
     const contents = localStorage.getItem('contents');
     if (!isNull(contents)) {
-      // this.usuario = JSON.parse(atob(contents)).user;
-      // this.token = JSON.parse(atob(contents)).access_token;
+      this.usuario = JSON.parse(atob(contents)).user;
+      this.token = JSON.parse(atob(contents)).access_token;
     }
   }
 
@@ -26,16 +30,16 @@ export class AuthService {
     return !!localStorage.getItem('contents');
   }
 
-  // getUser(): Usuario {
-  //   return JSON.parse(atob(localStorage.getItem('contents'))).user;
-  // }
+  getUser(): Usuario {
+    return JSON.parse(atob(localStorage.getItem('contents'))).user;
+  }
 
   getToken(): string {
     return JSON.parse(atob(localStorage.getItem('contents'))).access_token;
   }
 
-  login({username, password, remember}): Observable<boolean> {
-    return this.http.post<any>(`${environment.apiUrl}/auth/login`, {username, password, remember})
+  login(data:{email:string, password:string, remember:boolean}): Observable<boolean> {
+    return this.http.post<any>(`${environment.apiUrl}/login`, data)
       .pipe(map(response => {
         localStorage.setItem('contents', btoa(JSON.stringify(response)));
         if (!environment.production) {
@@ -43,14 +47,11 @@ export class AuthService {
         }
         return true;
       }));
-    // this.route.navigate(['/dashboard']);
   }
 
   logout(): void {
     setTimeout(() => {
       localStorage.removeItem('contents');
-      // this.usuario = null;
-      // this.token = null;
       window.location.reload();
     }, 2000);
   }

@@ -1,15 +1,32 @@
-<nb-layout>
-
+<nb-layout windowMode>
   <nb-layout-header fixed>
-    <!-- Insert header here -->
+
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-6">
+        <button nbButton status="success" size="large" (click)="toggleSidebar()" ghost>
+          <nb-icon icon="menu-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+        </button>
+        <a class="logo" href="/home">
+          <img src="/assets/imgs/logo_brasal.png" alt="Brasal" height="48">
+        </a>
+      </div>
+      <div class="col-6 d-flex justify-content-end">
+        <nb-user size="large" [name]="usuario?.name" [nbContextMenu]="items"></nb-user>
+      </div>
+    </div>
   </nb-layout-header>
+
+  <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
+    <nb-menu [items]="menu"></nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
     <router-outlet></router-outlet>
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    <!-- Insert footer here -->
+    <span class="createdBy">
+      © {{year | date : 'yyyy'}} Todos os direitos resevados. <b><a href="https://www.brasal.com.br/" target="_blank">Brasal</a></b>
+    </span>
   </nb-layout-footer>
-
 </nb-layout>
