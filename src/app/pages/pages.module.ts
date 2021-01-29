@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
 import {
-  NbButtonModule, NbCardModule, NbContextMenuModule,
+  NbButtonModule, NbCalendarModule, NbCardModule, NbContextMenuModule, NbDatepickerModule,
   NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
@@ -19,10 +19,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {NgxMaskModule} from "ngx-mask";
+import { EmpresasEditComponent } from './empresas/edit/empresas-edit.component';
+import { EmpresasListComponent } from './empresas/list/empresas-list.component';
+import {CalendarModule} from "primeng/calendar";
+import {NbDateFnsDateModule} from "@nebular/date-fns";
 
 
 @NgModule({
-  declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent],
+  declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent, EmpresasEditComponent, EmpresasListComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -41,6 +45,10 @@ import {NgxMaskModule} from "ngx-mask";
     NgSelectModule,
     NbSpinnerModule,
     NgxMaskModule,
+    CalendarModule,
+    NbCalendarModule,
+    NbDatepickerModule,
+    NbDateFnsDateModule,
   ]
 })
 export class PagesModule { }

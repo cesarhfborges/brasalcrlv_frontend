@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  NbDatepickerModule,
   NbDialogModule,
   NbIconModule,
   NbLayoutModule,
@@ -26,12 +27,20 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from "primeng/api";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {IConfig, NgxMaskModule} from "ngx-mask";
+import {NbDateFnsDateModule, NbDateFnsOptions} from "@nebular/date-fns";
 
 registerLocaleData(localePt);
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
+
+const dateFnsConfig: NbDateFnsOptions = {
+  format: 'dd/MM/yyyy',
+  parseOptions: {},
+  formatOptions: {},
+  getWeekOptions: {},
+}
 
 @NgModule({
   declarations: [
@@ -49,6 +58,8 @@ const maskConfig: Partial<IConfig> = {
     NbIconModule,
     ConfirmDialogModule,
     NgSelectModule,
+    NbDateFnsDateModule.forRoot(dateFnsConfig),
+    NbDatepickerModule.forRoot(),
     NgxMaskModule.forRoot(maskConfig),
     NbThemeModule.forRoot({name: 'default'}),
     NbSidebarModule.forRoot(),
@@ -59,7 +70,7 @@ const maskConfig: Partial<IConfig> = {
   ],
   providers: [
     ConfirmationService,
-    {provide: LOCALE_ID, useValue: 'pt-PT'},
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

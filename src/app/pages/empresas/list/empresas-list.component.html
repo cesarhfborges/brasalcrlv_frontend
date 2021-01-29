@@ -1,0 +1,63 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col">
+        Usuários
+      </div>
+      <div class="col-3 col-xl-2">
+        <button nbButton status="success" (click)="cadastraEmpresa()" fullWidth>
+          <nb-icon icon="plus-circle-outline"></nb-icon> Cadastrar
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+
+    <p-table [columns]="cols" [value]="empresas" [loading]="loading.empresas" [showLoader]="loading.empresas" dataKey="id">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+          <th style="width: 300px;">&nbsp;</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" [ngSwitch]="col.type">
+            <ng-template ngSwitchDefault>
+              {{rowData[col.field]}}
+            </ng-template>
+            <ng-template ngSwitchCase="date">
+              {{rowData[col.field] | date : 'dd/MM/yyyy'}}
+            </ng-template>
+            <ng-template ngSwitchCase="mask">
+              {{rowData[col.field] | mask : '00.000.000/0000-00'}}
+            </ng-template>
+          </td>
+          <td class="d-flex justify-content-end">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn" nbButton status="info" size="small" (click)="editarEmpresa(rowData)">
+                <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar
+              </button>
+              <button type="button" class="btn" nbButton status="danger" size="small" (click)="deleteEmpresa(rowData.id)">
+                <nb-icon icon="edit-outline"></nb-icon>&nbsp;Excluir
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loading">
+        <tr>
+          <th colspan="{{cols.length + 1}}" class="text-center">
+            Carregando Aguarde...
+          </th>
+        </tr>
+      </ng-template>
+    </p-table>
+  </nb-card-body>
+  <nb-card-footer>Total de usuários: {{empresas ? empresas.length : 0}}</nb-card-footer>
+</nb-card>
+
+<p-confirmDialog></p-confirmDialog>
+

@@ -1,1 +1,62 @@
-<p>home works!</p>
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <nb-card [nbSpinner]="loading.crlv" [nbSpinnerMessage]="'Consultando CRLV do veiculo. Aguarde...'">
+        <nb-card-header>Gerar CRLV</nb-card-header>
+        <nb-card-body>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="companies">Empresas:</label>
+              <ng-select
+                [items]="empresas"
+                [loading]="loading.empresas"
+                [multiple]="true"
+                loadingText="Carregando..."
+                bindLabel="name"
+                bindValue="id"
+                appendTo="body"
+                id="companies"
+                formControlName="companies-list"
+              ></ng-select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Placa:<span class="text-danger">*</span></label>
+            <input
+              class="form-control text-uppercase"
+              mask="SSS-0A00"
+              placeholder="Ex. AAA-0B23"
+              type="text"
+              formControlName="placa"
+              autocomplete="off"
+              nbInput
+              fullWidth
+            >
+            <small class="form-text text-muted">Informe a placa do veiculo.</small>
+          </div>
+
+          <div class="form-group">
+            <label>Renavam:<span class="text-danger">*</span></label>
+            <input
+              class="form-control text-uppercase"
+              mask="AAAAAAAAAAAAAAAA"
+              placeholder="Ex. "
+              type="text"
+              formControlName="renavam"
+              autocomplete="off"
+              nbInput
+              fullWidth
+            >
+            <small class="form-text text-muted">Informe o renavam do veiculo.</small>
+          </div>
+
+        </nb-card-body>
+        <nb-card-footer>
+          <button nbButton status="success" fullWidth>Consultar</button>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+  </div>
+</form>

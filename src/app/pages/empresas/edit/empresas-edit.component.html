@@ -1,0 +1,74 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-11 col-md-8 col-xl-6">
+    <form [formGroup]="form" (submit)="onSubmit()" enctype="multipart/form-data">
+      <nb-card>
+        <nb-card-header>Editando Empresa</nb-card-header>
+        <nb-card-body>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="name">Nome:</label>
+              <input type="text" id="name" name="name" formControlName="name" placeholder="Primeiro nome" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="cnpj">CNPJ:</label>
+              <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [dropSpecialCharacters]="true" formControlName="cnpj" placeholder="00.000.000/0000-00" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="certificate_expire">Data Expiração:</label>
+              <input
+                type="text"
+                id="certificate_expire"
+                name="certificate_expire"
+                formControlName="certificate_expire"
+                placeholder="certificate_expire"
+                nbInput
+                fullWidth
+                autocomplete="off"
+                [nbDatepicker]="datepicker"
+              >
+              <nb-datepicker #datepicker [min]="minDate"></nb-datepicker>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="certificate">Certificado:</label>
+              <input type="file" accept="application/pfx" id="certificate" name="certificate" formControlName="certificate" placeholder="certificate" nbInput fullWidth autocomplete="off" [accept]="'.pfx'" (change)="onFileChange($event)">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="certificate_password">certificate_password:</label>
+              <input type="password" id="certificate_password" name="certificate_password" formControlName="certificate_password" placeholder="certificate_password" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          {{form.value|json}}
+
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row d-flex justify-content-between">
+            <div class="col-6">
+              <button nbButton fullWidth status="basic" type="button" (click)="close()">
+                <nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar
+              </button>
+            </div>
+            <div class="col-6">
+              <button nbButton fullWidth status="success" type="submit">
+                <nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar
+              </button>
+            </div>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </div>
+</div>
