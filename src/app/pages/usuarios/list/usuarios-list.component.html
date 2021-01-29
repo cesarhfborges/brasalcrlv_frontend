@@ -32,7 +32,7 @@
               <button type="button" class="btn" nbButton status="info" size="small" (click)="editarUsuario(rowData)">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar
               </button>
-              <button type="button" class="btn" nbButton status="danger" size="small">
+              <button type="button" class="btn" nbButton status="danger" size="small" (click)="deleteUSuario()">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Excluir
               </button>
             </div>
@@ -50,3 +50,5 @@
   </nb-card-body>
   <nb-card-footer>Total de usuários: {{usuarios ? usuarios.length : 0}}</nb-card-footer>
 </nb-card>
+
+<p-confirmDialog></p-confirmDialog>

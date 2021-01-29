@@ -3,6 +3,7 @@ import {UsuariosService} from "../../../shared/services/usuarios.service";
 import {Usuario} from "../../../shared/models/usuario";
 import {NbDialogService} from "@nebular/theme";
 import {UsuariosEditComponent} from "../edit/usuarios-edit.component";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-usuarios-list',
@@ -22,6 +23,7 @@ export class UsuariosListComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService,
     private dialogService: NbDialogService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
@@ -70,7 +72,23 @@ export class UsuariosListComponent implements OnInit {
     );
   }
 
-  deleteUSuario(): void {
+  deleteUSuario(id: number): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza de que deseja realizar esta ação?',
+      header: "Atenção",
+      acceptLabel: "Sim",
+      rejectLabel: "Não",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.usuariosService.deleteUsuario(id).subscribe(
+          response => {
 
+          },
+          error => {
+
+          }
+        );
+      }
+    });
   }
 }

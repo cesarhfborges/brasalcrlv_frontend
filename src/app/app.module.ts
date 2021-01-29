@@ -22,6 +22,8 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 import {ErrorInterceptor} from "./shared/interceptors/error.interceptor";
 import {SharedModule} from "./shared/shared.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService} from "primeng/api";
 
 registerLocaleData(localePt);
 
@@ -39,6 +41,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     NgbModule,
     NbIconModule,
+    ConfirmDialogModule,
     NbThemeModule.forRoot({name: 'default'}),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
@@ -47,6 +50,7 @@ registerLocaleData(localePt);
     NbToastrModule.forRoot(),
   ],
   providers: [
+    ConfirmationService,
     {provide: LOCALE_ID, useValue: 'pt-PT'},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

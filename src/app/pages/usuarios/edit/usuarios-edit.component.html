@@ -5,10 +5,26 @@
 
       <div class="row">
         <div class="col-12 mb-2">
-          <label for="name">Nome</label>
-          <input type="text" id="name" name="name" formControlName="name" placeholder="Ex. Posto Brasília..." nbInput fullWidth>
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" formControlName="name" placeholder="Primeiro nome" nbInput fullWidth autocomplete="off">
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-12 mb-2">
+          <label for="lastname">Sobrenome:</label>
+          <input type="text" id="lastname" name="lastname" formControlName="lastname" placeholder="Sobrenome" nbInput fullWidth autocomplete="off">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 mb-2">
+          <label for="email">E-Mail:</label>
+          <input type="text" id="email" name="email" formControlName="email" placeholder="E-Mail" nbInput fullWidth autocomplete="off">
+        </div>
+      </div>
+
+
     </nb-card-body>
     <nb-card-footer>
       <div class="row d-flex justify-content-between">

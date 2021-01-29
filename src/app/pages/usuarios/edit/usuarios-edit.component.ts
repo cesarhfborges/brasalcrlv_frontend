@@ -19,7 +19,9 @@ export class UsuariosEditComponent implements OnInit {
   ) {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
-      // name: new FormControl(null, [Validators.required]),
+      lastname: new FormControl(null, []),
+      email: new FormControl(null, [Validators.required]),
+      cpf: new FormControl(null, [Validators.required]),
     });
   }
 

@@ -16,6 +16,7 @@ import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
 import {TableModule} from "primeng/table";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     TableModule,
     ReactiveFormsModule,
     NbInputModule,
+    ConfirmDialogModule,
   ]
 })
 export class PagesModule { }
