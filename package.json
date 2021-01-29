@@ -24,6 +24,7 @@
     "@nebular/eva-icons": "6.2.2",
     "@nebular/theme": "^6.2.2",
     "@ng-bootstrap/ng-bootstrap": "^8.0.4",
+    "@ng-select/ng-select": "^5.1.0",
     "bootstrap": "^4.5.0",
     "eva-icons": "^1.1.2",
     "primeicons": "^4.1.0",

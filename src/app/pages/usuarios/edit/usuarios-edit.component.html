@@ -1,44 +1,84 @@
-<form [formGroup]="form" (submit)="onSubmit()">
-  <nb-card>
-    <nb-card-header>Editando Usuário</nb-card-header>
-    <nb-card-body>
+<div class="row d-flex justify-content-center">
+  <div class="col-11 col-md-8 col-xl-6">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <nb-card [nbSpinner]="loading.usuarios">
+        <nb-card-header>Editando Usuário</nb-card-header>
+        <nb-card-body>
 
-      <div class="row">
-        <div class="col-12 mb-2">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" formControlName="name" placeholder="Primeiro nome" nbInput fullWidth autocomplete="off">
-        </div>
-      </div>
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="name">Nome:</label>
+              <input type="text" id="name" name="name" formControlName="name" placeholder="Primeiro nome" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
 
-      <div class="row">
-        <div class="col-12 mb-2">
-          <label for="lastname">Sobrenome:</label>
-          <input type="text" id="lastname" name="lastname" formControlName="lastname" placeholder="Sobrenome" nbInput fullWidth autocomplete="off">
-        </div>
-      </div>
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="lastname">Sobrenome:</label>
+              <input type="text" id="lastname" name="lastname" formControlName="lastname" placeholder="Sobrenome" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
 
-      <div class="row">
-        <div class="col-12 mb-2">
-          <label for="email">E-Mail:</label>
-          <input type="text" id="email" name="email" formControlName="email" placeholder="E-Mail" nbInput fullWidth autocomplete="off">
-        </div>
-      </div>
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="cpf">Sobrenome:</label>
+              <input type="text" id="cpf" name="cpf" formControlName="cpf" placeholder="000.000.000-00" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="email">E-Mail:</label>
+              <input type="text" id="email" name="email" formControlName="email" placeholder="E-Mail" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="password">Senha:</label>
+              <input type="password" id="password" name="password" formControlName="password" placeholder="Senha" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="confirm">Confirmação:</label>
+              <input type="password" id="confirm" name="confirm" formControlName="password_confirmation" placeholder="Confirmação de senha" nbInput fullWidth autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="companies">Empresas:</label>
+              <ng-select
+                [items]="empresas"
+                [loading]="loading.empresas"
+                [multiple]="true"
+                loadingText="Carregando..."
+                bindLabel="name" bindValue="id"
+                appendTo="body"
+                id="companies"
+                formControlName="companies-list"
+              ></ng-select>
+            </div>
+          </div>
 
 
-    </nb-card-body>
-    <nb-card-footer>
-      <div class="row d-flex justify-content-between">
-        <div class="col-6">
-          <button nbButton fullWidth status="basic" type="button" (click)="close()">
-            <nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar
-          </button>
-        </div>
-        <div class="col-6">
-          <button nbButton fullWidth status="success" type="submit">
-            <nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar
-          </button>
-        </div>
-      </div>
-    </nb-card-footer>
-  </nb-card>
-</form>
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row d-flex justify-content-between">
+            <div class="col-6">
+              <button nbButton fullWidth status="basic" type="button" (click)="close()">
+                <nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar
+              </button>
+            </div>
+            <div class="col-6">
+              <button nbButton fullWidth status="success" type="submit">
+                <nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar
+              </button>
+            </div>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </div>
+</div>

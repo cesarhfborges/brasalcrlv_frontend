@@ -9,7 +9,7 @@ import {
   NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
-  NbSidebarModule,
+  NbSidebarModule, NbSpinnerModule,
   NbUserModule
 } from "@nebular/theme";
 import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
@@ -17,6 +17,7 @@ import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
 import {TableModule} from "primeng/table";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 
 @NgModule({
@@ -36,6 +37,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     ReactiveFormsModule,
     NbInputModule,
     ConfirmDialogModule,
+    NgSelectModule,
+    NbSpinnerModule,
   ]
 })
 export class PagesModule { }

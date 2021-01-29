@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UsuariosService} from "../../../shared/services/usuarios.service";
 import {Usuario} from "../../../shared/models/usuario";
-import {NbDialogService} from "@nebular/theme";
+import {NbDialogService, NbToastrService} from "@nebular/theme";
 import {UsuariosEditComponent} from "../edit/usuarios-edit.component";
 import {ConfirmationService} from "primeng/api";
 
@@ -14,9 +14,9 @@ export class UsuariosListComponent implements OnInit {
 
   usuarios: Usuario[];
 
-  cols: Array<{field: string; header: string; }> = [
-    { field: 'name', header: 'Nome' },
-    { field: 'lastname', header: 'Sobrenome' },
+  cols: Array<{ field: string; header: string; }> = [
+    {field: 'name', header: 'Nome'},
+    {field: 'lastname', header: 'Sobrenome'},
   ];
   loading = false;
 
@@ -24,7 +24,9 @@ export class UsuariosListComponent implements OnInit {
     private usuariosService: UsuariosService,
     private dialogService: NbDialogService,
     private confirmationService: ConfirmationService,
-  ) { }
+    private toastrService: NbToastrService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.getUsuarios();
@@ -55,16 +57,38 @@ export class UsuariosListComponent implements OnInit {
       },
       dialogClass: 'model-full'
     }).onClose.subscribe((response) => {
-      if (response) {
-        console.log(response);
+        if (response) {
+          this.toastrService.success('Dados atualizados com sucesso', 'Ok', {
+            duration: 3000,
+            destroyByClick: true,
+            status: "success",
+            preventDuplicates: true,
+          })
+        }
+      },
+      error => {
+        console.log(error);
       }
-        // if (response) {
-        //   const p = this.postos.find(ps => ps.id = response.id);
-        //   p.name = response.name;
-        //   p.cnpj = response.cnpj;
-        //   p.itau_client_id = response.itau_client_id;
-        //   this.toastService.showToastSuccess('Filial atualizada.', 'Sucesso');
-        // }
+    );
+  }
+
+  cadastraUsuario(): void {
+    this.dialogService.open(UsuariosEditComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: false,
+      hasBackdrop: true,
+      hasScroll: true,
+      dialogClass: 'model-full'
+    }).onClose.subscribe((response) => {
+        if (response) {
+          this.usuarios.push(response);
+          this.toastrService.success('Usuario cadastrado com sucesso', 'Ok', {
+            duration: 3000,
+            destroyByClick: true,
+            status: "success",
+            preventDuplicates: true,
+          })
+        }
       },
       error => {
         console.log(error);
@@ -82,10 +106,21 @@ export class UsuariosListComponent implements OnInit {
       accept: () => {
         this.usuariosService.deleteUsuario(id).subscribe(
           response => {
-
+            const i = this.usuarios.findIndex(u => u.id == id);
+            this.usuarios.splice(i,1);
+            this.toastrService.success('Usuario removido com sucesso.', 'Ok', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
           },
           error => {
-
+            console.log(error);
+            this.toastrService.danger('Parece que alguma coisa nao foi bem, tente novamente mais tarde.', 'Ops', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
           }
         );
       }

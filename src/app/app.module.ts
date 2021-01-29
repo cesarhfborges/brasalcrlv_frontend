@@ -24,6 +24,7 @@ import {SharedModule} from "./shared/shared.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from "primeng/api";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 registerLocaleData(localePt);
 
@@ -42,6 +43,7 @@ registerLocaleData(localePt);
     NgbModule,
     NbIconModule,
     ConfirmDialogModule,
+    NgSelectModule,
     NbThemeModule.forRoot({name: 'default'}),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

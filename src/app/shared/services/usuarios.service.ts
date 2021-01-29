@@ -18,6 +18,14 @@ export class UsuariosService {
     return this.http.get<Usuario[]>(`${environment.apiUrl}/users`);
   }
 
+  updateUsuario(usuario: Usuario): Observable<Usuario[]> {
+    return this.http.patch<Usuario[]>(`${environment.apiUrl}/users/${usuario.id}`, usuario);
+  }
+
+  createUsuario(usuario: Usuario): Observable<Usuario[]> {
+    return this.http.post<Usuario[]>(`${environment.apiUrl}/users`, usuario);
+  }
+
   deleteUsuario(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/users/${id}`);
   }

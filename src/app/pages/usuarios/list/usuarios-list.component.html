@@ -5,7 +5,7 @@
         Usuários
       </div>
       <div class="col-3 col-xl-2">
-        <button nbButton status="success" (click)="editarUsuario(null)" fullWidth>
+        <button nbButton status="success" (click)="cadastraUsuario()" fullWidth>
           <nb-icon icon="plus-circle-outline"></nb-icon> Cadastrar
         </button>
       </div>
@@ -32,7 +32,7 @@
               <button type="button" class="btn" nbButton status="info" size="small" (click)="editarUsuario(rowData)">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar
               </button>
-              <button type="button" class="btn" nbButton status="danger" size="small" (click)="deleteUSuario()">
+              <button type="button" class="btn" nbButton status="danger" size="small" (click)="deleteUSuario(rowData.id)">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Excluir
               </button>
             </div>
