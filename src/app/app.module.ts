@@ -25,8 +25,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService} from "primeng/api";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {IConfig, NgxMaskModule} from "ngx-mask";
 
 registerLocaleData(localePt);
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -44,6 +49,7 @@ registerLocaleData(localePt);
     NbIconModule,
     ConfirmDialogModule,
     NgSelectModule,
+    NgxMaskModule.forRoot(maskConfig),
     NbThemeModule.forRoot({name: 'default'}),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

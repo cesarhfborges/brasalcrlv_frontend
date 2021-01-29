@@ -18,6 +18,7 @@ import {TableModule} from "primeng/table";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
     ConfirmDialogModule,
     NgSelectModule,
     NbSpinnerModule,
+    NgxMaskModule,
   ]
 })
 export class PagesModule { }
