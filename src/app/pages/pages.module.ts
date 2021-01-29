@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
 import {
   NbButtonModule, NbCardModule, NbContextMenuModule,
-  NbIconModule,
+  NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
   NbSidebarModule,
@@ -15,6 +15,7 @@ import {
 import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
 import {TableModule} from "primeng/table";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import {TableModule} from "primeng/table";
     NbMenuModule,
     NbContextMenuModule,
     NbCardModule,
-    TableModule
+    TableModule,
+    ReactiveFormsModule,
+    NbInputModule,
   ]
 })
 export class PagesModule { }

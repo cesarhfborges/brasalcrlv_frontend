@@ -1,6 +1,15 @@
 <nb-card>
   <nb-card-header>
-    Nebula
+    <div class="row">
+      <div class="col">
+        Usuários
+      </div>
+      <div class="col-3 col-xl-2">
+        <button nbButton status="success" (click)="editarUsuario(null)" fullWidth>
+          <nb-icon icon="plus-circle-outline"></nb-icon> Cadastrar
+        </button>
+      </div>
+    </div>
   </nb-card-header>
   <nb-card-body>
 
@@ -10,7 +19,7 @@
           <th *ngFor="let col of columns">
             {{col.header}}
           </th>
-          <th style="width: 240px;">&nbsp;</th>
+          <th style="width: 300px;">&nbsp;</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -18,10 +27,15 @@
           <td *ngFor="let col of columns">
             {{rowData[col.field]}}
           </td>
-          <td>
-            <button nbButton outline status="info">
-              <nb-icon icon="edit-outline"></nb-icon>
-            </button>
+          <td class="d-flex justify-content-end">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn" nbButton status="info" size="small" (click)="editarUsuario(rowData)">
+                <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar
+              </button>
+              <button type="button" class="btn" nbButton status="danger" size="small">
+                <nb-icon icon="edit-outline"></nb-icon>&nbsp;Excluir
+              </button>
+            </div>
           </td>
         </tr>
       </ng-template>

@@ -1,1 +1,28 @@
-<p>usuarios-edit works!</p>
+<form [formGroup]="form" (submit)="onSubmit()">
+  <nb-card>
+    <nb-card-header>Editando Usuário</nb-card-header>
+    <nb-card-body>
+
+      <div class="row">
+        <div class="col-12 mb-2">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" formControlName="name" placeholder="Ex. Posto Brasília..." nbInput fullWidth>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="row d-flex justify-content-between">
+        <div class="col-6">
+          <button nbButton fullWidth status="basic" type="button" (click)="close()">
+            <nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar
+          </button>
+        </div>
+        <div class="col-6">
+          <button nbButton fullWidth status="success" type="submit">
+            <nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar
+          </button>
+        </div>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</form>

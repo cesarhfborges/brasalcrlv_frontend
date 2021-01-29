@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  NbDialogModule,
   NbIconModule,
   NbLayoutModule,
   NbMenuModule,
@@ -42,6 +43,7 @@ registerLocaleData(localePt);
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbWindowModule.forRoot(),
+    NbDialogModule.forRoot(),
     NbToastrModule.forRoot(),
   ],
   providers: [

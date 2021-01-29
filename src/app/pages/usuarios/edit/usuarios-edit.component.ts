@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Usuario} from "../../../shared/models/usuario";
+import {NbDialogRef} from "@nebular/theme";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-usuarios-edit',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuariosEditComponent implements OnInit {
 
-  constructor() { }
+  usuario: Usuario;
 
-  ngOnInit(): void {
+  form: FormGroup;
+
+  constructor(
+    protected dialogRef: NbDialogRef<any>,
+  ) {
+    this.form = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      // name: new FormControl(null, [Validators.required]),
+    });
   }
 
+  ngOnInit(): void {
+    if (this.usuario) {
+      this.form.patchValue(this.usuario)
+    }
+  }
+
+  close(): void {
+    this.dialogRef.close(null);
+  }
+
+  onSubmit() {
+
+  }
 }
