@@ -63,6 +63,8 @@ export class EmpresasListComponent implements OnInit {
       dialogClass: 'model-full'
     }).onClose.subscribe((response) => {
         if (response) {
+          const i = this.empresas.findIndex(i => i.id === response.id);
+          this.empresas[i] = response;
           this.toastrService.success('Dados atualizados com sucesso', 'Ok', {
             duration: 3000,
             destroyByClick: true,
@@ -78,7 +80,35 @@ export class EmpresasListComponent implements OnInit {
   }
 
   deleteEmpresa(id) {
-
+    this.confirmationService.confirm({
+      message: 'Tem certeza de que deseja realizar esta ação?',
+      header: "Atenção",
+      acceptLabel: "Sim",
+      acceptButtonStyleClass: 'btn-warning',
+      rejectLabel: "Não",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.empresasService.deleteEmpresa(id).subscribe(
+          response => {
+            const i = this.empresas.findIndex(u => u.id == id);
+            this.empresas.splice(i,1);
+            this.toastrService.success('Usuario removido com sucesso.', 'Ok', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
+          },
+          error => {
+            console.log(error);
+            this.toastrService.danger('Parece que alguma coisa nao foi bem, tente novamente mais tarde.', 'Ops', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
+          }
+        );
+      }
+    });
   }
 
   cadastraEmpresa() {

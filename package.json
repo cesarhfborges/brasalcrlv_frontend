@@ -24,6 +24,7 @@
     "@nebular/date-fns": "^7.0.0",
     "@nebular/eva-icons": "6.2.2",
     "@nebular/moment": "^7.0.0",
+    "@nebular/security": "^7.0.0",
     "@nebular/theme": "^6.2.2",
     "@ng-bootstrap/ng-bootstrap": "^8.0.4",
     "@ng-select/ng-select": "^5.1.0",

@@ -5,12 +5,12 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
 import {
-  NbButtonModule, NbCalendarModule, NbCardModule, NbContextMenuModule, NbDatepickerModule,
-  NbIconModule, NbInputModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbSidebarModule, NbSpinnerModule,
-  NbUserModule
+    NbButtonModule, NbCalendarModule, NbCardModule, NbContextMenuModule, NbDatepickerModule,
+    NbIconModule, NbInputModule,
+    NbLayoutModule,
+    NbMenuModule, NbSelectModule,
+    NbSidebarModule, NbSpinnerModule,
+    NbUserModule
 } from "@nebular/theme";
 import { UsuariosListComponent } from './usuarios/list/usuarios-list.component';
 import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
@@ -27,28 +27,29 @@ import {NbDateFnsDateModule} from "@nebular/date-fns";
 
 @NgModule({
   declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent, EmpresasEditComponent, EmpresasListComponent],
-  imports: [
-    CommonModule,
-    PagesRoutingModule,
-    NbLayoutModule,
-    NbSidebarModule,
-    NbIconModule,
-    NbButtonModule,
-    NbUserModule,
-    NbMenuModule,
-    NbContextMenuModule,
-    NbCardModule,
-    TableModule,
-    ReactiveFormsModule,
-    NbInputModule,
-    ConfirmDialogModule,
-    NgSelectModule,
-    NbSpinnerModule,
-    NgxMaskModule,
-    CalendarModule,
-    NbCalendarModule,
-    NbDatepickerModule,
-    NbDateFnsDateModule,
-  ]
+    imports: [
+        CommonModule,
+        PagesRoutingModule,
+        NbLayoutModule,
+        NbSidebarModule,
+        NbIconModule,
+        NbButtonModule,
+        NbUserModule,
+        NbMenuModule,
+        NbContextMenuModule,
+        NbCardModule,
+        TableModule,
+        ReactiveFormsModule,
+        NbInputModule,
+        ConfirmDialogModule,
+        NgSelectModule,
+        NbSpinnerModule,
+        NgxMaskModule,
+        CalendarModule,
+        NbCalendarModule,
+        NbDatepickerModule,
+        NbDateFnsDateModule,
+        NbSelectModule,
+    ]
 })
 export class PagesModule { }

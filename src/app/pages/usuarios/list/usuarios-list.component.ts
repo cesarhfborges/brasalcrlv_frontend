@@ -58,6 +58,8 @@ export class UsuariosListComponent implements OnInit {
       dialogClass: 'model-full'
     }).onClose.subscribe((response) => {
         if (response) {
+          const i = this.usuarios.findIndex(i => i.id === response.id);
+          this.usuarios[i] = response;
           this.toastrService.success('Dados atualizados com sucesso', 'Ok', {
             duration: 3000,
             destroyByClick: true,
@@ -101,6 +103,7 @@ export class UsuariosListComponent implements OnInit {
       message: 'Tem certeza de que deseja realizar esta ação?',
       header: "Atenção",
       acceptLabel: "Sim",
+      acceptButtonStyleClass: 'btn-warning',
       rejectLabel: "Não",
       icon: "pi pi-exclamation-triangle",
       accept: () => {

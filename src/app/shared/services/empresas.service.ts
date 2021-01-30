@@ -28,6 +28,10 @@ export class EmpresasService {
     return this.http.post<Empresas>(`${environment.apiUrl}/companies`, empresa);
   }
 
+  deleteEmpresa(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/companies/${id}`);
+  }
+
   upload(fileToUpload: File): Observable<any>{
     const httpClient = new HttpClient(new HttpXhrBackend({build: () => new XMLHttpRequest()}));
     const formData: FormData = new FormData();

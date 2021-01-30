@@ -69,7 +69,6 @@ export class EmpresasEditComponent implements OnInit {
       const file: File = event.target.files[0];
       this.empresasService.upload(file).subscribe(
         response => {
-          console.log(response);
           this.loading.upload = false;
           this.form.get(input).patchValue(response.url);
         },
@@ -85,6 +84,7 @@ export class EmpresasEditComponent implements OnInit {
     this.empresasService.updateEmpresa({...this.form.value, id: this.empresa.id}).subscribe(
       response => {
         console.log(response);
+        this.dialogRef.close(response);
       },
       error => {
         console.log(error);
@@ -96,6 +96,7 @@ export class EmpresasEditComponent implements OnInit {
     this.empresasService.createEmpresa({...this.form.value}).subscribe(
       response => {
         console.log(response);
+        this.dialogRef.close(response);
       },
       error => {
         console.log(error);

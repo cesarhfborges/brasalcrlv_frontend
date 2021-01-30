@@ -36,7 +36,8 @@ export class UsuariosEditComponent implements OnInit {
       cpf: new FormControl(null, [Validators.required]),
       password: new FormControl(null, []),
       password_confirmation: new FormControl(null, []),
-      'companies-list': new FormControl(null, [Validators.required]),
+      permission: new FormControl(null, [Validators.required]),
+      companies_list: new FormControl(null, [Validators.required]),
     }, {
       validators: (abstractControll: AbstractControl) => {
         if (abstractControll.value.password !== abstractControll.value.password_confirmation) {
@@ -76,6 +77,7 @@ export class UsuariosEditComponent implements OnInit {
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      console.log(this.form.value);
       this.loading.usuarios = true;
       if (this.usuario) {
         this.updateUsuario();

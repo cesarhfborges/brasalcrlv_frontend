@@ -40,8 +40,8 @@ export class HomeComponent implements OnInit {
     this.getEmpresas();
     this.usuario = this.authService.getUser();
 
-    if (this.usuario.companies_list) { // && this.usuario.companies_list.length < 2
-      this.form.patchValue({company: this.usuario.companies_list.shift()});
+    if (this.usuario.companies_list) {
+      this.form.patchValue({company: this.usuario.companies_list[0]});
     }
 
     if (!environment.production) {
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   getEmpresas(): void {
     this.empresasService.getEmpresas().subscribe(
       response => {
-        this.empresas = response;
+        this.empresas = response.filter(e => this.usuario.companies_list.includes(e.id));
       },
       error => {
         console.log(error);
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       this.loading.crlv = true;
       this.crlvService.generateCrlv(this.form.value).subscribe(
         response => {
-          console.log(response);
+          this.showPdf({...this.form.value, pdf: response});
           this.loading.crlv = false;
         },
         error => {
@@ -77,5 +77,31 @@ export class HomeComponent implements OnInit {
         }
       );
     }
+  }
+
+  private showPdf(options: { placa: string, renavam: string, pdf: string }): void {
+    // height=${window.screen.availHeight - 100},
+    //   width=${window.screen.availWidth - 150},
+    const features = `
+    top=0,
+    left=0,
+    width=${screen.width - 100},
+    height=${screen.height - 100},
+    fullscreen=yes,
+    toolbar=no,
+    titlebar=no,
+    location=no,
+    status=no,
+    menubar=no,
+    position=center,
+    directories=no,
+    copyhistory=no`;
+    const pdfWindow = window.open('_blank', 'MsgWindow', features);
+    setTimeout(_ => {
+      pdfWindow.document.write(`<iframe style="height: 100%; width: 100%; outline: none; border: none;" src='data:application/pdf;base64,${options.pdf}'></iframe>`);
+      pdfWindow.document.head.title = `clrv_${options.placa}_${options.renavam}`;
+      pdfWindow.document.body.style.padding = '0';
+      pdfWindow.document.body.style.margin = '0';
+    }, 60);
   }
 }

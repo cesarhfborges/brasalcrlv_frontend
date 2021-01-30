@@ -6,14 +6,12 @@
         <nb-card-body>
 
           <div class="row">
-            <div class="col-12 mb-2">
+            <div class="col-12 col-lg-8 mb-2">
               <label for="name">Nome:</label>
               <input type="text" id="name" name="name" formControlName="name" placeholder="Primeiro nome" nbInput fullWidth autocomplete="off">
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-12 mb-2">
+            <div class="col-12 col-lg-4 mb-2">
               <label for="cnpj">CNPJ:</label>
               <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [dropSpecialCharacters]="true" formControlName="cnpj" placeholder="00.000.000/0000-00" nbInput fullWidth autocomplete="off">
             </div>
@@ -39,6 +37,8 @@
             </div>
           </div>
 
+          <p class="p-0 m-0 mt-3">É necessário converter o arquivo .pfx em dois arquivos, .pem e .key</p>
+
           <div class="row">
             <div class="col-12 mb-2">
               <label for="certificate">Certificado:<span class="text-danger">*(.pem)</span></label>
@@ -56,11 +56,9 @@
           <div class="row">
             <div class="col-12 mb-2">
               <label for="certificate_password">Senha:</label>
-              <input type="password" id="certificate_password" name="certificate_password" formControlName="certificate_password" placeholder="certificate_password" nbInput fullWidth autocomplete="off">
+              <input type="password" id="certificate_password" name="certificate_password" formControlName="certificate_password" placeholder="Senha do certificado" nbInput fullWidth autocomplete="off">
             </div>
           </div>
-
-          {{form.value|json}}
 
         </nb-card-body>
         <nb-card-footer>

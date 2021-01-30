@@ -41,11 +41,15 @@ export class AuthService {
   login(data:{email:string, password:string, remember:boolean}): Observable<boolean> {
     return this.http.post<any>(`${environment.apiUrl}/login`, data)
       .pipe(map(response => {
-        localStorage.setItem('contents', btoa(JSON.stringify(response)));
-        if (!environment.production) {
-          localStorage.setItem('contents_backup', JSON.stringify(response));
+        console.log(response);
+        if (response.access_token) {
+          localStorage.setItem('contents', btoa(JSON.stringify(response)));
+          if (!environment.production) {
+            localStorage.setItem('contents_backup', JSON.stringify(response));
+          }
+          return true;
         }
-        return true;
+        return false;
       }));
   }
 

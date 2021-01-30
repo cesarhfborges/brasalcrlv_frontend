@@ -39,13 +39,18 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.authService.getUser();
+
     this.menuService.onItemClick().subscribe(( event ) => {
       switch (event.item.target){
         case 'logout':
           this.authService.logout();
           break;
       }
-    })
+    });
+    this.menu = MENU_ITEMS.filter(i => {
+      const p: Array<any> = i.data as Array<any>;
+      return p.includes(this.usuario.permission);
+    });
   }
 
 
