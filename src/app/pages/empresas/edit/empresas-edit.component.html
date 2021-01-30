@@ -19,6 +19,8 @@
             </div>
           </div>
 
+          <hr>
+
           <div class="row">
             <div class="col-12 mb-2">
               <label for="certificate_expire">Data Expiração:</label>
@@ -39,14 +41,21 @@
 
           <div class="row">
             <div class="col-12 mb-2">
-              <label for="certificate">Certificado:</label>
-              <input type="file" accept="application/pfx" id="certificate" name="certificate" formControlName="certificate" placeholder="certificate" nbInput fullWidth autocomplete="off" [accept]="'.pfx'" (change)="onFileChange($event)">
+              <label for="certificate">Certificado:<span class="text-danger">*(.pem)</span></label>
+              <input type="file" id="certificate" name="certificate" placeholder="certificate" nbInput fullWidth autocomplete="off" [accept]="'.pem'" (change)="onFileChange($event, 'pem')">
             </div>
           </div>
 
           <div class="row">
             <div class="col-12 mb-2">
-              <label for="certificate_password">certificate_password:</label>
+              <label for="certificateKey">Certificado:<span class="text-danger">*(.key)</span></label>
+              <input type="file" id="certificateKey" name="certificateKey" placeholder="certificateKey" nbInput fullWidth autocomplete="off" [accept]="'.key'" (change)="onFileChange($event, 'key')">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="certificate_password">Senha:</label>
               <input type="password" id="certificate_password" name="certificate_password" formControlName="certificate_password" placeholder="certificate_password" nbInput fullWidth autocomplete="off">
             </div>
           </div>

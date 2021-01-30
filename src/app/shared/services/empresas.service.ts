@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpXhrBackend} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Empresas} from "../models/empresas";
 import {environment} from "../../../environments/environment";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import {environment} from "../../../environments/environment";
 export class EmpresasService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService,
   ) {
   }
 
@@ -26,18 +28,13 @@ export class EmpresasService {
     return this.http.post<Empresas>(`${environment.apiUrl}/companies`, empresa);
   }
 
-  uploadCertificate(form: any): void {
-    this.http.post(`${environment.apiUrl}/certificate`, form, {
-      reportProgress: true,
-      observe: 'events'
-    }).pipe(
-      // uploadProgress(progress => (this.percentDone = progress)),
-      // toResponseBody()
-    );
-    //   .subscribe(response => {
-    //   // this.progress = 0;
-    //   // this.signup.reset();
-    //   // do something with the response
-    // });
+  upload(fileToUpload: File): Observable<any>{
+    const httpClient = new HttpClient(new HttpXhrBackend({build: () => new XMLHttpRequest()}));
+    const formData: FormData = new FormData();
+    formData.append('arquivo', fileToUpload, fileToUpload.name);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    return httpClient.post<any>(`${environment.apiUrl}/upload`, formData, {headers: headers});
   }
 }

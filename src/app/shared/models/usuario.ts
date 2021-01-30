@@ -6,5 +6,5 @@ export interface Usuario {
   cpf: string;
   password?: string;
   password_confirmation?: string;
-  "companies-list?": Array<number>;
+  companies_list?: Array<number>;
 }

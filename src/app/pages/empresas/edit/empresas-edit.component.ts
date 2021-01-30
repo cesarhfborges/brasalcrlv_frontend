@@ -18,6 +18,11 @@ export class EmpresasEditComponent implements OnInit {
 
   empresa: Empresas;
 
+  loading = {
+    empresa: false,
+    upload: false,
+  }
+
   constructor(
     protected dialogRef: NbDialogRef<any>,
     protected dateService: NbDateService<Date>,
@@ -26,10 +31,10 @@ export class EmpresasEditComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       cnpj: new FormControl(null, [Validators.required]),
-      certificate: new FormControl(null, []),
+      pem: new FormControl(null, []),
+      key: new FormControl(null, []),
       certificate_expire: new FormControl(null, []),
       certificate_password: new FormControl(null, []),
-      fileSource: new FormControl(null, [])
     });
   }
 
@@ -58,14 +63,21 @@ export class EmpresasEditComponent implements OnInit {
     }
   }
 
-  onFileChange(event) {
-
+  onFileChange(event, input) {
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      console.log(event.target.files);
-      this.form.patchValue({
-        fileSource: file
-      });
+      this.loading.upload = true;
+      const file: File = event.target.files[0];
+      this.empresasService.upload(file).subscribe(
+        response => {
+          console.log(response);
+          this.loading.upload = false;
+          this.form.get(input).patchValue(response.url);
+        },
+        error => {
+          console.log(error);
+          this.loading.upload = false;
+        }
+      );
     }
   }
 
