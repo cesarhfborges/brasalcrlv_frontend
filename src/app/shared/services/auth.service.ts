@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {isNull} from 'util';
@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Usuario} from "../models/usuario";
-import {NbToastrService} from '@nebular/theme';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,6 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private toastrService: NbToastrService,
   ) {
     const contents = localStorage.getItem('contents');
     if (!isNull(contents)) {
@@ -40,7 +38,7 @@ export class AuthService {
     return JSON.parse(atob(localStorage.getItem('contents'))).access_token;
   }
 
-  login(data:{email:string, password:string, remember:boolean}): Observable<boolean> {
+  login(data: { email: string, password: string, remember: boolean }): Observable<boolean> {
     return this.http.post<any>(`${environment.apiUrl}/login`, data)
       .pipe(map(response => {
         if (response.access_token) {
@@ -55,19 +53,11 @@ export class AuthService {
   }
 
   logout(): void {
-    this.toastrService.warning('Saindo do sistema.', 'Ok', {
-      duration: 3000,
-      destroyByClick: true,
-      status: "success",
-      preventDuplicates: true,
-    })
-    setTimeout(() => {
-      localStorage.removeItem('contents');
-      window.location.reload();
-    }, 1300);
+    localStorage.removeItem('contents');
+    window.location.reload();
   }
 
-  private logoutExec(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/auth/logout`);
+  logoutExec(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/auth/logout`);
   }
 }

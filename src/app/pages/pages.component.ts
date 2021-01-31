@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {NbMenuItem, NbMenuService, NbSidebarService} from "@nebular/theme";
+import {NbMenuItem, NbMenuService, NbSidebarService, NbToastrService} from "@nebular/theme";
 import {LayoutService} from "../shared/services/layout.service";
 import {filter} from "rxjs/operators";
 import {AuthService} from "../shared/services/auth.service";
@@ -34,6 +34,7 @@ export class PagesComponent implements OnInit {
     private menuService: NbMenuService,
     private sidebarService: NbSidebarService,
     private authService: AuthService,
+    private toastrService: NbToastrService,
   ) {
   }
 
@@ -43,7 +44,20 @@ export class PagesComponent implements OnInit {
     this.menuService.onItemClick().subscribe(( event ) => {
       switch (event.item.target){
         case 'logout':
-          this.authService.logout();
+          this.toastrService.warning('Saindo do sistema.', 'Ok', {
+            duration: 3000,
+            destroyByClick: true,
+            status: "success",
+            preventDuplicates: true,
+          });
+          this.authService.logoutExec().subscribe(
+            response => {
+              this.sair();
+            },
+            error => {
+              this.sair();
+            }
+          )
           break;
       }
     });
@@ -56,5 +70,9 @@ export class PagesComponent implements OnInit {
 
   toggleSidebar(): void {
     this.sidebarService.toggle(true, 'menu-sidebar');
+  }
+
+  sair(): void {
+    this.authService.logout();
   }
 }
