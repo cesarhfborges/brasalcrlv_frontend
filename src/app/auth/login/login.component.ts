@@ -39,20 +39,13 @@ export class LoginComponent implements OnInit {
         response => {
           this.loading = false;
           this.form.enable();
-          if (response) {
-            this.router.navigate(['/home']);
-          } else {
-            this.toastrService.danger('Verifique seu usuário e senha e tente novamente.', 'Ops', {
-              duration: 3000,
-              destroyByClick: true,
-            })
-          }
+          this.router.navigate(['/home']);
         },
-        error => {
-          console.log(error);
+        e => {
+          console.log(e);
           this.loading = false;
           this.form.enable();
-          this.toastrService.danger('parece que houve um problema de comunicação, tente novamente mais tarde!', 'Ops', {
+          this.toastrService.danger(e.errors, 'Ops', {
             duration: 3000,
             destroyByClick: true,
           })
