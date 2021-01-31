@@ -1,7 +1,7 @@
 <div class="row h-100 d-flex align-items-center">
   <div class="col-12 col-md-6 col-xl-4 mx-auto">
     <form [formGroup]="form" (submit)="onSubmit()">
-      <nb-card>
+      <nb-card [nbSpinner]="loading" nbSpinnerStatus="warning" nbSpinnerMessage="Aguarde...">
         <nb-card-header>Login</nb-card-header>
         <nb-card-body>
           <div class="form-group">
@@ -13,10 +13,7 @@
             <input type="password" class="form-control" formControlName="password" id="inputPassword" autocomplete="off">
           </div>
           <div class="row">
-            <div class="col-6">
-              <button nbButton type="button" class="p-0 m-0" status="warning" ghost>Esqueci a senha</button>
-            </div>
-            <div class="col-6 d-flex justify-content-end">
+            <div class="col-12 d-flex justify-content-end">
               <nb-checkbox status="info" formControlName="remember">Lembrar</nb-checkbox>
             </div>
           </div>
@@ -24,7 +21,7 @@
         <nb-card-footer>
           <div class="row d-flex justify-content-between">
             <div class="col-12">
-              <button nbButton type="submit" status="success" fullWidth>Login</button>
+              <button nbButton type="submit" status="success" [disabled]="loading" fullWidth>Login</button>
             </div>
           </div>
         </nb-card-footer>

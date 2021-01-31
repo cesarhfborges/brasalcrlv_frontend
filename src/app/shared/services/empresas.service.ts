@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpXhrBackend} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Empresas} from "../models/empresas";
+import {Empresa} from "../models/empresa";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "./auth.service";
 
@@ -16,16 +16,16 @@ export class EmpresasService {
   ) {
   }
 
-  getEmpresas(): Observable<Empresas[]> {
-    return this.http.get<Empresas[]>(`${environment.apiUrl}/companies`);
+  getEmpresas(): Observable<Empresa[]> {
+    return this.http.get<Empresa[]>(`${environment.apiUrl}/companies`);
   }
 
-  updateEmpresa(empresa: Empresas): Observable<Empresas> {
-    return this.http.put<Empresas>(`${environment.apiUrl}/companies/${empresa.id}`, empresa);
+  updateEmpresa(empresa: Empresa): Observable<Empresa> {
+    return this.http.put<Empresa>(`${environment.apiUrl}/companies/${empresa.id}`, empresa);
   }
 
-  createEmpresa(empresa: Empresas): Observable<Empresas> {
-    return this.http.post<Empresas>(`${environment.apiUrl}/companies`, empresa);
+  createEmpresa(empresa: Empresa): Observable<Empresa> {
+    return this.http.post<Empresa>(`${environment.apiUrl}/companies`, empresa);
   }
 
   deleteEmpresa(id: number): Observable<any> {

@@ -59,7 +59,6 @@ export class UsuariosEditComponent implements OnInit {
     this.loading.empresas = true;
     this.empresasService.getEmpresas().subscribe(
       response => {
-        console.log(response);
         this.empresas = response;
         this.loading.empresas = false;
       },

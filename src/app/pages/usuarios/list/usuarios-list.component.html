@@ -13,7 +13,7 @@
   </nb-card-header>
   <nb-card-body>
 
-    <p-table [columns]="cols" [value]="usuarios" [loading]="loading" [showLoader]="false" dataKey="id">
+    <p-table [columns]="cols" [value]="usuarios" [loading]="loading" [showLoader]="true" dataKey="id">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">

@@ -1,4 +1,4 @@
-export interface Empresas {
+export interface Empresa {
   id?: number;
   name: string;
   cnpj: string;

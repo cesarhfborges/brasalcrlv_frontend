@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NbDateService, NbDialogRef} from "@nebular/theme";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Empresas} from "../../../shared/models/empresas";
+import {Empresa} from "../../../shared/models/empresa";
 import {EmpresasService} from "../../../shared/services/empresas.service";
 import {} from 'date-fns';
 
@@ -16,11 +16,14 @@ export class EmpresasEditComponent implements OnInit {
 
   form: FormGroup;
 
-  empresa: Empresas;
+  empresa: Empresa;
 
   loading = {
     empresa: false,
-    upload: false,
+    upload: {
+      pem: false,
+      key: false,
+    },
   }
 
   constructor(
@@ -55,6 +58,7 @@ export class EmpresasEditComponent implements OnInit {
   onSubmit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      this.loading.empresa = true;
       if (this.empresa) {
         this.updateEmpresa();
       } else {
@@ -65,16 +69,16 @@ export class EmpresasEditComponent implements OnInit {
 
   onFileChange(event, input) {
     if (event.target.files.length > 0) {
-      this.loading.upload = true;
+      this.loading.upload[input] = true;
       const file: File = event.target.files[0];
       this.empresasService.upload(file).subscribe(
         response => {
-          this.loading.upload = false;
+          this.loading.upload[input] = false;
           this.form.get(input).patchValue(response.url);
         },
         error => {
           console.log(error);
-          this.loading.upload = false;
+          this.loading.upload[input] = false;
         }
       );
     }
@@ -83,11 +87,12 @@ export class EmpresasEditComponent implements OnInit {
   private updateEmpresa(): void {
     this.empresasService.updateEmpresa({...this.form.value, id: this.empresa.id}).subscribe(
       response => {
-        console.log(response);
         this.dialogRef.close(response);
+        this.loading.empresa = false;
       },
       error => {
         console.log(error);
+        this.loading.empresa = false;
       }
     );
   }
@@ -95,11 +100,12 @@ export class EmpresasEditComponent implements OnInit {
   private cadastraEmpresa(): void {
     this.empresasService.createEmpresa({...this.form.value}).subscribe(
       response => {
-        console.log(response);
         this.dialogRef.close(response);
+        this.loading.empresa = false;
       },
       error => {
         console.log(error);
+        this.loading.empresa = false;
       }
     );
   }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Empresas} from "../../../shared/models/empresas";
+import {Empresa} from "../../../shared/models/empresa";
 import {EmpresasService} from "../../../shared/services/empresas.service";
 import {NbDialogService, NbToastrService} from "@nebular/theme";
 import {EmpresasEditComponent} from "../edit/empresas-edit.component";
@@ -16,7 +16,7 @@ export class EmpresasListComponent implements OnInit {
     empresas: true
   };
 
-  empresas: Empresas[];
+  empresas: Empresa[];
 
   cols: Array<{ field: string; header: string; type: string; }> = [
     {field: 'name', header: 'Nome', type: 'string'},
@@ -42,7 +42,6 @@ export class EmpresasListComponent implements OnInit {
       response => {
         this.empresas = response;
         this.loading.empresas = false;
-        console.log(response)
       },
       error => {
         this.loading.empresas = false;
@@ -51,7 +50,7 @@ export class EmpresasListComponent implements OnInit {
     );
   }
 
-  editarEmpresa(empresa: Empresas) {
+  editarEmpresa(empresa: Empresa) {
     this.dialogService.open(EmpresasEditComponent, {
       autoFocus: true,
       closeOnBackdropClick: false,
@@ -88,11 +87,13 @@ export class EmpresasListComponent implements OnInit {
       rejectLabel: "Não",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
+        this.loading.empresas = true;
         this.empresasService.deleteEmpresa(id).subscribe(
           response => {
             const i = this.empresas.findIndex(u => u.id == id);
             this.empresas.splice(i,1);
-            this.toastrService.success('Usuario removido com sucesso.', 'Ok', {
+            this.loading.empresas = false;
+            this.toastrService.success('Empresa removida com sucesso.', 'Ok', {
               duration: 3000,
               destroyByClick: true,
               preventDuplicates: true,
@@ -100,6 +101,7 @@ export class EmpresasListComponent implements OnInit {
           },
           error => {
             console.log(error);
+            this.loading.empresas = false;
             this.toastrService.danger('Parece que alguma coisa nao foi bem, tente novamente mais tarde.', 'Ops', {
               duration: 3000,
               destroyByClick: true,
@@ -112,6 +114,26 @@ export class EmpresasListComponent implements OnInit {
   }
 
   cadastraEmpresa() {
-
+    this.dialogService.open(EmpresasEditComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: false,
+      hasBackdrop: true,
+      hasScroll: true,
+      dialogClass: 'model-full'
+    }).onClose.subscribe((response) => {
+        if (response) {
+          this.empresas.push(response);
+          this.toastrService.success('Empresa cadastrada com sucesso', 'Ok', {
+            duration: 3000,
+            destroyByClick: true,
+            status: "success",
+            preventDuplicates: true,
+          })
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

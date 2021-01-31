@@ -1,7 +1,7 @@
 <div class="row d-flex justify-content-center">
   <div class="col-11 col-md-8 col-xl-6">
     <form [formGroup]="form" (submit)="onSubmit()" enctype="multipart/form-data">
-      <nb-card>
+      <nb-card [nbSpinner]="loading.empresa" nbSpinnerMessage="Aguarde..." nbSpinnerStatus="info">
         <nb-card-header>Editando Empresa</nb-card-header>
         <nb-card-body>
 
@@ -42,14 +42,16 @@
           <div class="row">
             <div class="col-12 mb-2">
               <label for="certificate">Certificado:<span class="text-danger">*(.pem)</span></label>
-              <input type="file" id="certificate" name="certificate" placeholder="certificate" nbInput fullWidth autocomplete="off" [accept]="'.pem'" (change)="onFileChange($event, 'pem')">
+              <input type="file" id="certificate" name="certificate" placeholder="certificate" nbInput fullWidth [disabled]="loading.upload.pem" autocomplete="off" [accept]="'.pem'" (change)="onFileChange($event, 'pem')">
+              <small *ngIf="loading.upload.pem" class="form-text text-muted">Aguarde, enviando certificado.</small>
             </div>
           </div>
 
           <div class="row">
             <div class="col-12 mb-2">
               <label for="certificateKey">Certificado:<span class="text-danger">*(.key)</span></label>
-              <input type="file" id="certificateKey" name="certificateKey" placeholder="certificateKey" nbInput fullWidth autocomplete="off" [accept]="'.key'" (change)="onFileChange($event, 'key')">
+              <input type="file" id="certificateKey" name="certificateKey" placeholder="certificateKey" [disabled]="loading.upload.key" nbInput fullWidth autocomplete="off" [accept]="'.key'" (change)="onFileChange($event, 'key')">
+              <small *ngIf="loading.upload.key" class="form-text text-muted">Aguarde, enviando certificado.</small>
             </div>
           </div>
 

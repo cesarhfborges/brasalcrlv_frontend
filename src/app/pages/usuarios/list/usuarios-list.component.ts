@@ -36,7 +36,6 @@ export class UsuariosListComponent implements OnInit {
     this.loading = true;
     this.usuariosService.getUsuarios().subscribe(
       response => {
-        console.log(response);
         this.loading = false;
         this.usuarios = response;
       },
@@ -107,10 +106,12 @@ export class UsuariosListComponent implements OnInit {
       rejectLabel: "Não",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
+        this.loading = true;
         this.usuariosService.deleteUsuario(id).subscribe(
           response => {
             const i = this.usuarios.findIndex(u => u.id == id);
             this.usuarios.splice(i,1);
+            this.loading = false;
             this.toastrService.success('Usuario removido com sucesso.', 'Ok', {
               duration: 3000,
               destroyByClick: true,
@@ -119,6 +120,7 @@ export class UsuariosListComponent implements OnInit {
           },
           error => {
             console.log(error);
+            this.loading = false;
             this.toastrService.danger('Parece que alguma coisa nao foi bem, tente novamente mais tarde.', 'Ops', {
               duration: 3000,
               destroyByClick: true,

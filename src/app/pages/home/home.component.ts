@@ -3,7 +3,7 @@ import {Usuario} from "../../shared/models/usuario";
 import {AuthService} from "../../shared/services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../environments/environment";
-import {Empresas} from "../../shared/models/empresas";
+import {Empresa} from "../../shared/models/empresa";
 import {EmpresasService} from "../../shared/services/empresas.service";
 import {CrlvService} from "../../shared/services/crlv.service";
 import {NbToastrService} from "@nebular/theme";
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   }
 
   usuario: Usuario;
-  empresas: Empresas[];
+  empresas: Empresa[];
 
   constructor(
     private authService: AuthService,

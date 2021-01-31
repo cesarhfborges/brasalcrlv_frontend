@@ -33,24 +33,28 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      this.loading = true;
+      this.form.disable();
       this.authService.login(this.form.value).subscribe(
         response => {
+          this.loading = false;
+          this.form.enable();
           if (response) {
             this.router.navigate(['/home']);
           } else {
             this.toastrService.danger('Verifique seu usuário e senha e tente novamente.', 'Ops', {
               duration: 3000,
               destroyByClick: true,
-              preventDuplicates: true,
             })
           }
         },
         error => {
           console.log(error);
+          this.loading = false;
+          this.form.enable();
           this.toastrService.danger('parece que houve um problema de comunicação, tente novamente mais tarde!', 'Ops', {
             duration: 3000,
             destroyByClick: true,
-            preventDuplicates: true,
           })
         }
       );
@@ -58,7 +62,6 @@ export class LoginComponent implements OnInit {
       this.toastrService.warning('Verifique os campos, e tente novamente', 'Ops', {
         duration: 3000,
         destroyByClick: true,
-        preventDuplicates: true,
       })
     }
   }

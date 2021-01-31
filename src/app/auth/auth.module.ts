@@ -4,20 +4,21 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
-import {NbButtonModule, NbCardModule, NbCheckboxModule, NbLayoutModule} from "@nebular/theme";
+import {NbButtonModule, NbCardModule, NbCheckboxModule, NbLayoutModule, NbSpinnerModule} from "@nebular/theme";
 import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [LoginComponent, AuthComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    NbLayoutModule,
-    NbCardModule,
-    NbButtonModule,
-    NbCheckboxModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        NbLayoutModule,
+        NbCardModule,
+        NbButtonModule,
+        NbCheckboxModule,
+        ReactiveFormsModule,
+        NbSpinnerModule
+    ]
 })
 export class AuthModule { }
