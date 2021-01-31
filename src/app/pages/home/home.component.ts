@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {Empresas} from "../../shared/models/empresas";
 import {EmpresasService} from "../../shared/services/empresas.service";
 import {CrlvService} from "../../shared/services/crlv.service";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private empresasService: EmpresasService,
     private crlvService: CrlvService,
+    private toastrService: NbToastrService,
   ) {
     this.form = new FormGroup({
       placa: new FormControl(null, [Validators.required, Validators.minLength(7)]),
@@ -68,7 +70,15 @@ export class HomeComponent implements OnInit {
       this.loading.crlv = true;
       this.crlvService.generateCrlv(this.form.value).subscribe(
         response => {
-          this.showPdf({...this.form.value, pdf: response});
+          if (response.base64) {
+            this.showPdf({...this.form.value, pdf: response.base64});
+          } else {
+            this.toastrService.warning('Nao foi encontrado crlv para este veiculo tente novamente mais tarde ou verifique os campos.', 'Ops', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
+          }
           this.loading.crlv = false;
         },
         error => {
