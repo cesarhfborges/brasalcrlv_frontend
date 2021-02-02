@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {NbDialogRef} from "@nebular/theme";
+import {NbDialogRef, NbToastrService} from "@nebular/theme";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-alterar-senha',
@@ -21,11 +22,14 @@ export class AlterarSenhaComponent implements OnInit {
 
   constructor(
     protected dialogRef: NbDialogRef<any>,
+    private authService: AuthService,
+    private toastrService: NbToastrService,
   ) {
     this.form = new FormGroup({
       old_password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       password_confirmation: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+      logout: new FormControl(false, []),
     }, {
       validators: (abstractControll: AbstractControl) => {
         if (abstractControll.value.password !== abstractControll.value.password_confirmation) {
@@ -43,8 +47,41 @@ export class AlterarSenhaComponent implements OnInit {
     this.submitted = true;
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      console.log(this.form.value);
       this.loading.alterar = true;
+      this.authService.changePassword(this.form.value).subscribe(
+        response => {
+          this.loading.alterar = false;
+          console.log(response);
+
+          if (response.status === 205) {
+            this.toastrService.success('Senha alterada com sucesso, desconectando da sessão.', 'Ok', {
+              duration: 3000,
+              destroyByClick: true,
+            });
+            setTimeout(_ => {
+              this.authService.logout()
+            }, 1200);
+          } else {
+            this.toastrService.success('Senha alterada com sucesso.', 'Ok', {
+              duration: 3000,
+              destroyByClick: true,
+            });
+            this.dialogRef.close(response);
+          }
+        },
+        error => {
+          console.log(error);
+          this.loading.alterar = false;
+          const lg = this.form.get('logout').value;
+          this.form.reset();
+          this.form.get('logout').patchValue(lg);
+          this.submitted = false;
+          this.toastrService.warning(error.message, 'Ops', {
+            duration: 3000,
+            destroyByClick: true,
+          })
+        }
+      );
     } else {
       const invalid = [];
       const controls = this.form.controls;

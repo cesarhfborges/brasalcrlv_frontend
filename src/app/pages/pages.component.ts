@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {NbDialogService, NbMenuItem, NbMenuService, NbSidebarService, NbToastrService} from "@nebular/theme";
-import {LayoutService} from "../shared/services/layout.service";
-import {filter} from "rxjs/operators";
 import {AuthService} from "../shared/services/auth.service";
 import {Usuario} from "../shared/models/usuario";
 import {MENU_ITEMS} from "./pages-menu";
-import {UsuariosEditComponent} from "./usuarios/edit/usuarios-edit.component";
 import {AlterarSenhaComponent} from "./alterar-senha/alterar-senha.component";
 
 @Component({
@@ -49,8 +46,8 @@ export class PagesComponent implements OnInit {
   ngOnInit(): void {
     this.usuario = this.authService.getUser();
 
-    this.menuService.onItemClick().subscribe(( event ) => {
-      switch (event.item.target){
+    this.menuService.onItemClick().subscribe((event) => {
+      switch (event.item.target) {
         case 'logout':
           this.toastrService.warning('Saindo do sistema.', 'Ok', {
             duration: 3000,
@@ -98,9 +95,7 @@ export class PagesComponent implements OnInit {
       },
       dialogClass: 'model-full'
     }).onClose.subscribe((response) => {
-        if (response) {
-          console.log(response);
-        }
+        console.log(response);
       },
       error => {
         console.log(error);

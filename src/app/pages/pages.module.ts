@@ -5,7 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
 import {
-    NbButtonModule, NbCalendarModule, NbCardModule, NbContextMenuModule, NbDatepickerModule,
+    NbButtonModule, NbCalendarModule, NbCardModule, NbCheckboxModule, NbContextMenuModule, NbDatepickerModule,
     NbIconModule, NbInputModule,
     NbLayoutModule,
     NbMenuModule, NbSelectModule,
@@ -51,6 +51,7 @@ import { AlterarSenhaComponent } from './alterar-senha/alterar-senha.component';
         NbDatepickerModule,
         NbDateFnsDateModule,
         NbSelectModule,
+        NbCheckboxModule,
     ]
 })
 export class PagesModule { }

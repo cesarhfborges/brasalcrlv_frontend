@@ -60,4 +60,8 @@ export class AuthService {
   logoutExec(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/auth/logout`);
   }
+
+  changePassword(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/change_password`, data);
+  }
 }
