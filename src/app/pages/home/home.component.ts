@@ -84,6 +84,19 @@ export class HomeComponent implements OnInit {
         error => {
           console.log(error);
           this.loading.crlv = false;
+          if (error.status === 404) {
+            this.toastrService.warning('Nao foi encontrado crlv para este veiculo tente novamente mais tarde ou verifique os campos.', 'Ops', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
+          } else {
+            this.toastrService.danger('Erro ao comunincar com os servidores serpro.', 'Ops', {
+              duration: 3000,
+              destroyByClick: true,
+              preventDuplicates: true,
+            })
+          }
         }
       );
     }
