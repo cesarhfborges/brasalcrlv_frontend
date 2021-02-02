@@ -5,16 +5,24 @@
         Usuários
       </div>
       <div class="col-3 col-xl-2">
-        <button nbButton status="success" (click)="cadastraEmpresa()" fullWidth>
-          <nb-icon icon="plus-circle-outline"></nb-icon> Cadastrar
+        <button (click)="open(content)" fullWidth nbButton status="info">
+          <nb-icon icon="info-outline"></nb-icon>
+          PFX
+        </button>
+      </div>
+      <div class="col-3 col-xl-2">
+        <button (click)="cadastraEmpresa()" fullWidth nbButton status="success">
+          <nb-icon icon="plus-circle-outline"></nb-icon>
+          Cadastrar
         </button>
       </div>
     </div>
   </nb-card-header>
   <nb-card-body>
 
-    <p-table [columns]="cols" [value]="empresas" [loading]="loading.empresas" [showLoader]="loading.empresas" dataKey="id" class="p-datatable-responsive" [responsive]="true">
-      <ng-template pTemplate="header" let-columns>
+    <p-table [columns]="cols" [loading]="loading.empresas" [responsive]="true" [showLoader]="loading.empresas"
+             [value]="empresas" class="p-datatable-responsive" dataKey="id">
+      <ng-template let-columns pTemplate="header">
         <tr>
           <th *ngFor="let col of columns">
             {{col.header}}
@@ -22,7 +30,7 @@
           <th style="width: 240px;">&nbsp;</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <ng-template let-columns="columns" let-rowData pTemplate="body">
         <tr>
           <td *ngFor="let col of columns" [ngSwitch]="col.type">
             <span class="p-column-title">{{col.header}}</span>
@@ -37,11 +45,12 @@
             </ng-template>
           </td>
           <td class="d-flex justify-content-end">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn" nbButton status="info" size="small" (click)="editarEmpresa(rowData)">
+            <div aria-label="Basic example" class="btn-group" role="group">
+              <button (click)="editarEmpresa(rowData)" class="btn" nbButton size="small" status="info" type="button">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar
               </button>
-              <button type="button" class="btn" nbButton status="danger" size="small" (click)="deleteEmpresa(rowData.id)">
+              <button (click)="deleteEmpresa(rowData.id)" class="btn" nbButton size="small" status="danger"
+                      type="button">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Excluir
               </button>
             </div>
@@ -50,7 +59,7 @@
       </ng-template>
       <ng-template pTemplate="loading">
         <tr>
-          <th colspan="{{cols.length + 1}}" class="text-center">
+          <th class="text-center" colspan="{{cols.length + 1}}">
             Carregando Aguarde...
           </th>
         </tr>
@@ -61,4 +70,57 @@
 </nb-card>
 
 <p-confirmDialog></p-confirmDialog>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Atenção</h4>
+    <button (click)="modal.dismiss('close')" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4>Como Converter .PFX em .pem e .key</h4>
+    <p>
+      Para configurar uma nova empresa ou atualizar uma ja existente, é necessário seguir os passos abaixo:
+    </p>
+    <ol>
+      <li>Faça o Download do <a href="https://slproweb.com/products/Win32OpenSSL.html" target="_blank">WinOpenSSL</a>.
+        <span class="text-warning">atenção efetue o download da versão compativel com seu Windows X64 ou X32</span></li>
+      <li>Efetue a instalação normalmente.</li>
+      <li>
+        Adicione a seguinte linha no Path Windows:<br>
+        "C:\Program Files\OpenSSL-Win64\bin"
+      </li>
+      <li>
+        Abra o cmd e navegue ate sua area de trabalho e crie um pasta na sua area de trabalho chamada "certs".<br>
+        <pre>
+          cd C:\Users\"SEU_USUARIO"\Desktop
+          mkdir certs
+          cd certs
+        </pre>
+      </li>
+      <li>
+        Cole o certificado PFX dentro da pasta chamada certs na area de trabalho
+      </li>
+      <li>
+        Execute os comandos abaixo um de cada vez.
+        <span class="text-warning">atenção é necessário possuir a senha do certificado digital para executa-los.</span>
+        <pre>
+          openssl pkcs12 -in brasal.pfx -out brasal.tpem -nodes
+          openssl rsa -in brasal.tpem -out brasal.key
+          openssl pkcs12 -in brasal.pfx -clcerts -nokeys -out brasal.pem
+        </pre>
+      </li>
+      <li>
+        Em seguida caso tudo tenha corrido bem, a pasta que voce criou deve conter 4 arquivo sendo eles: <br>
+        brasal.pfx = Chave privada e-cnpj (nao sera usado) <br>
+        brasal.tpem = Chave de troca (nao sera usado) <br>
+        brasal.key = chave de autenticação SSL <br>
+        brasal.pem = chave privada SSL <br>
+        Tudo certo agora basta voce inserir dentro do cadastro ou edição da empresa.
+      </li>
+    </ol>
+
+  </div>
+</ng-template>
 

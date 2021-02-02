@@ -4,6 +4,7 @@ import {EmpresasService} from "../../../shared/services/empresas.service";
 import {NbDialogService, NbToastrService} from "@nebular/theme";
 import {EmpresasEditComponent} from "../edit/empresas-edit.component";
 import {ConfirmationService} from "primeng/api";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-empresas-list',
@@ -28,6 +29,7 @@ export class EmpresasListComponent implements OnInit {
     private empresasService: EmpresasService,
     private dialogService: NbDialogService,
     private toastrService: NbToastrService,
+    private modalService: NgbModal,
     private confirmationService: ConfirmationService,
   ) {
   }
@@ -111,6 +113,10 @@ export class EmpresasListComponent implements OnInit {
         );
       }
     });
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',  size: 'xl', scrollable: true});
   }
 
   cadastraEmpresa() {
