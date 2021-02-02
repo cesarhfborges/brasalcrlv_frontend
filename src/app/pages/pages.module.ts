@@ -23,10 +23,11 @@ import { EmpresasEditComponent } from './empresas/edit/empresas-edit.component';
 import { EmpresasListComponent } from './empresas/list/empresas-list.component';
 import {CalendarModule} from "primeng/calendar";
 import {NbDateFnsDateModule} from "@nebular/date-fns";
+import { AlterarSenhaComponent } from './alterar-senha/alterar-senha.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent, EmpresasEditComponent, EmpresasListComponent],
+  declarations: [HomeComponent, PagesComponent, UsuariosListComponent, UsuariosEditComponent, EmpresasEditComponent, EmpresasListComponent, AlterarSenhaComponent],
     imports: [
         CommonModule,
         PagesRoutingModule,

@@ -1,0 +1,77 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-11 col-md-8 col-xl-6">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <nb-card [nbSpinner]="loading.alterar" nbSpinnerStatus="warning">
+        <nb-card-header>Alterar Senha</nb-card-header>
+        <nb-card-body>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="old_password">Senha atual:</label>
+              <input type="password" id="old_password" name="old_password" formControlName="old_password" nbInput fullWidth autocomplete="off">
+              <small *ngIf="submitted && form.get('old_password').touched && form.get('old_password').invalid" class="form-text text-danger">
+                <ng-template [ngIf]="form.get('old_password').errors.minlength">
+                  Tamanho minimo da senha é de 4 caracteres.
+                </ng-template>
+                <ng-template [ngIf]="form.get('old_password').errors.required" #passwordRequired>
+                  Obrigatório informar sua senha anterior.
+                </ng-template>
+              </small>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="password">Nova senha:</label>
+              <input type="password" id="password" name="password" formControlName="password" placeholder="Senha" nbInput fullWidth autocomplete="off">
+              <small *ngIf="submitted && form.get('password').touched && form.get('password').invalid" class="form-text text-danger">
+                <ng-template [ngIf]="form.get('password').errors.minlength">
+                  Tamanho minimo da senha é de 4 caracteres.
+                </ng-template>
+                <ng-template [ngIf]="form.get('password').errors.required" #passwordRequired>
+                  Obrigatório informar uma senha.
+                </ng-template>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-2">
+              <label for="confirm">Repetir:</label>
+              <input type="password" id="confirm" name="confirm" formControlName="password_confirmation" placeholder="Confirmação de senha" nbInput fullWidth autocomplete="off">
+              <small *ngIf="submitted && form.get('password_confirmation').touched && form.get('password_confirmation').invalid" class="form-text text-danger">
+                <ng-template [ngIf]="form.get('password_confirmation').errors.minlength">
+                  Tamanho minimo da confirmação de senha é de 4 caracteres.
+                </ng-template>
+                <ng-template [ngIf]="form.get('password_confirmation').errors.required" #passwordRequired>
+                  Obrigatório confirmar a senha.
+                </ng-template>
+              </small>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 mb-2">
+              <small *ngIf="submitted && form.invalid && form.touched && form.errors.passwordMisMatch" class="form-text text-danger">As senhas digitadas não conferem.</small>
+            </div>
+          </div>
+
+
+        </nb-card-body>
+        <nb-card-footer>
+          <div class="row d-flex justify-content-between">
+            <div class="col-6">
+              <button nbButton fullWidth status="basic" type="button" (click)="close()">
+                <nb-icon icon="arrow-back-outline"></nb-icon>&nbsp;Cancelar
+              </button>
+            </div>
+            <div class="col-6">
+              <button nbButton fullWidth status="success" type="submit">
+                <nb-icon icon="checkmark-outline"></nb-icon>&nbsp;Salvar
+              </button>
+            </div>
+          </div>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </div>
+</div>

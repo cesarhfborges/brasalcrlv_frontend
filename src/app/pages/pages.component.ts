@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {NbMenuItem, NbMenuService, NbSidebarService, NbToastrService} from "@nebular/theme";
+import {NbDialogService, NbMenuItem, NbMenuService, NbSidebarService, NbToastrService} from "@nebular/theme";
 import {LayoutService} from "../shared/services/layout.service";
 import {filter} from "rxjs/operators";
 import {AuthService} from "../shared/services/auth.service";
 import {Usuario} from "../shared/models/usuario";
 import {MENU_ITEMS} from "./pages-menu";
+import {UsuariosEditComponent} from "./usuarios/edit/usuarios-edit.component";
+import {AlterarSenhaComponent} from "./alterar-senha/alterar-senha.component";
 
 @Component({
   selector: 'app-pages',
@@ -24,8 +26,13 @@ export class PagesComponent implements OnInit {
 
   items: NbMenuItem[] = [
     {
-      title: 'Sair',
+      title: 'Alterar Senha',
       icon: 'unlock-outline',
+      target: 'password',
+    },
+    {
+      title: 'Sair',
+      icon: 'log-in-outline',
       target: 'logout',
     },
   ];
@@ -35,6 +42,7 @@ export class PagesComponent implements OnInit {
     private sidebarService: NbSidebarService,
     private authService: AuthService,
     private toastrService: NbToastrService,
+    private dialogService: NbDialogService,
   ) {
   }
 
@@ -59,6 +67,9 @@ export class PagesComponent implements OnInit {
             }
           )
           break;
+        case 'password':
+          this.changePassword();
+          break;
       }
     });
     this.menu = MENU_ITEMS.filter(i => {
@@ -72,7 +83,28 @@ export class PagesComponent implements OnInit {
     this.sidebarService.toggle(true, 'menu-sidebar');
   }
 
-  sair(): void {
+  private sair(): void {
     this.authService.logout();
+  }
+
+  private changePassword(): void {
+    this.dialogService.open(AlterarSenhaComponent, {
+      autoFocus: true,
+      closeOnBackdropClick: false,
+      hasBackdrop: true,
+      hasScroll: true,
+      context: {
+        primeiroAcesso: false,
+      },
+      dialogClass: 'model-full'
+    }).onClose.subscribe((response) => {
+        if (response) {
+          console.log(response);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
