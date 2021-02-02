@@ -32,3 +32,47 @@
 .ng-invalid.ng-touched {
   border-color: red!important;
 }
+
+@media screen and (max-width: 760px) {
+  .p-datatable {
+    &.p-datatable-responsive {
+      .p-datatable-thead > tr > th,
+      .p-datatable-tfoot > tr > td {
+        display: none !important;
+      }
+
+      .p-datatable-tbody {
+        tr {
+          border-left: 1px solid #dee2e6 !important;
+          border-right: 1px solid #dee2e6 !important;
+          &:first-child {
+            border-top: 1px solid #dee2e6;
+          }
+          td {
+            text-align: left;
+            display: block;
+            width: 100%;
+            float: left;
+            clear: left;
+            border-bottom: 1px solid #dee2e6 !important;
+
+            .p-column-title {
+              padding: .4rem;
+              min-width: 30%;
+              display: inline-block;
+              margin: -.4em 1em -.4em -.4rem;
+              font-weight: bold;
+            }
+            div.btn-group {
+              width: 100%;
+            }
+
+            //&:last-child {
+            //  border-bottom: 1px solid #dee2e6;
+            //}
+          }
+        }
+      }
+    }
+  }
+}

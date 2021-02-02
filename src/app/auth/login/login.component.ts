@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {NbToastrService} from "@nebular/theme";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -21,10 +22,16 @@ export class LoginComponent implements OnInit {
     private toastrService: NbToastrService,
   ) {
     this.form = new FormGroup({
-      email: new FormControl('chborges@brasal.com.br', [Validators.required, Validators.email]),
-      password: new FormControl('password', [Validators.required, Validators.minLength(4)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
       remember: new FormControl(false, [Validators.required]),
     });
+    if (!environment.production) {
+      this.form.patchValue({
+        email: 'chborges@brasal.com.br',
+        password: 'password'
+      });
+    }
   }
 
   ngOnInit(): void {

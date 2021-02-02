@@ -13,18 +13,19 @@
   </nb-card-header>
   <nb-card-body>
 
-    <p-table [columns]="cols" [value]="empresas" [loading]="loading.empresas" [showLoader]="loading.empresas" dataKey="id">
+    <p-table [columns]="cols" [value]="empresas" [loading]="loading.empresas" [showLoader]="loading.empresas" dataKey="id" class="p-datatable-responsive" [responsive]="true">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">
             {{col.header}}
           </th>
-          <th style="width: 300px;">&nbsp;</th>
+          <th style="width: 240px;">&nbsp;</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
           <td *ngFor="let col of columns" [ngSwitch]="col.type">
+            <span class="p-column-title">{{col.header}}</span>
             <ng-template ngSwitchDefault>
               {{rowData[col.field]}}
             </ng-template>

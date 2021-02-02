@@ -4,7 +4,7 @@
       <div class="col">
         Usuários
       </div>
-      <div class="col-3 col-xl-2">
+      <div class="col-6 col-lg-3 col-xl-2">
         <button nbButton status="success" (click)="cadastraUsuario()" fullWidth>
           <nb-icon icon="plus-circle-outline"></nb-icon> Cadastrar
         </button>
@@ -13,21 +13,22 @@
   </nb-card-header>
   <nb-card-body>
 
-    <p-table [columns]="cols" [value]="usuarios" [loading]="loading" [showLoader]="true" dataKey="id">
+    <p-table class="p-datatable-responsive" [columns]="cols" [value]="usuarios" [loading]="loading" [showLoader]="true" dataKey="id" [responsive]="true">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">
             {{col.header}}
           </th>
-          <th style="width: 300px;">&nbsp;</th>
+          <th style="width: 240px;">&nbsp;</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
           <td *ngFor="let col of columns">
+            <span class="p-column-title">{{col.header}}</span>
             {{rowData[col.field]}}
           </td>
-          <td class="d-flex justify-content-end">
+          <td class="d-flex justify-content-center justify-content-md-end">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn" nbButton status="info" size="small" (click)="editarUsuario(rowData)">
                 <nb-icon icon="edit-outline"></nb-icon>&nbsp;Editar

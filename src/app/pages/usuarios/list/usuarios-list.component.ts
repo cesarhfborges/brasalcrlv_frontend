@@ -16,7 +16,7 @@ export class UsuariosListComponent implements OnInit {
 
   cols: Array<{ field: string; header: string; }> = [
     {field: 'name', header: 'Nome'},
-    {field: 'lastname', header: 'Sobrenome'},
+    {field: 'email', header: 'E-Mail'},
   ];
   loading = false;
 
