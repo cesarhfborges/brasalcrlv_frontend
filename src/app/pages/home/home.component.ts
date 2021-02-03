@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
       placa: new FormControl(null, [Validators.required, Validators.minLength(7)]),
       renavam: new FormControl(null, [Validators.required, Validators.minLength(11)]),
       company: new FormControl('', [Validators.required]),
+      filial: new FormControl(null, []),
     });
   }
 

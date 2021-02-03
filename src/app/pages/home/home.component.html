@@ -6,7 +6,7 @@
         <nb-card-body>
 
           <div class="row">
-            <div class="col-12 mb-2">
+            <div class="col-12 mb-4">
               <label for="companies">Empresa:<span class="text-danger">*</span></label>
               <ng-select
                 [items]="empresas"
@@ -19,6 +19,12 @@
                 formControlName="company"
               ></ng-select>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label>CNPJ Filial: <span class="text-info">Opcional</span></label>
+            <input type="text" id="filial" name="filial" mask="00.000.000/0000-00" [dropSpecialCharacters]="true" formControlName="filial" placeholder="00.000.000/0000-00" nbInput fullWidth autocomplete="off">
+            <small class="form-text text-muted">Para consultar veiculos relacionados a uma empresa filial este campo é obrigatório</small>
           </div>
 
           <div class="form-group">
